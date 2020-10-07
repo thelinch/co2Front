@@ -19,7 +19,9 @@ const SelectCreatableForm = ({
     placeholder,
     isMulti,
     field,
-    form
+    form,
+    options,
+    isLoading
 }) => {
     /* 
     useEffect(() => {
@@ -70,7 +72,8 @@ const SelectCreatableForm = ({
 
             handleInputChange
         }
-
+        options={options}
+        isLoading={isLoading}
         placeholder={
             placeholder
         }

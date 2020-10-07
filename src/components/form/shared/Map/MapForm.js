@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react"
-import GoogleMapReact from 'google-map-react';
 import SearchBox from "../../../GoogleMap/SearchBox";
 import GoogleMap from "../../../GoogleMap/googleMap";
-import isEmpty from "lodash/isEmpty"
 import Marker from "../../../GoogleMap/Marker";
-import Geocode from "../../../../../Config/GeoCodeConfig"
+import Geocode from "../../../../Config/GeoCodeConfig"
 class MapForm extends React.Component {
     constructor(props) {
         super(props)

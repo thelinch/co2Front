@@ -37,7 +37,8 @@ class SelectField extends Component {
         return option ? option : '';
     }
     handleChange = (selected) => {
-        const value = selected ? selected.value : '';
+        console.log("selet", selected)
+        const value = selected ? this.props.isMulti ? selected : selected.value : '';
         this.setState({
             selectedOption: selected,
         }, () => this.props.form.setFieldValue(this.props.field.name, value))
@@ -45,13 +46,14 @@ class SelectField extends Component {
 
     render() {
         // console.log(this.props)
-        const { field, form, options, isDisabled, isClearable, placeholder, isLoading } = this.props;
+        const { field, form, options, isDisabled, isClearable, placeholder, isLoading, isMulti } = this.props;
         const { selectedOption } = this.state;
         return (
             <Select
                 name={field.name}
                 value={selectedOption}
                 onChange={this.handleChange}
+                isMulti={isMulti}
                 onBlur={field.onBlur}
                 options={options}
                 clearable={false}
@@ -78,7 +80,8 @@ SelectField.propTypes = {
     placeholder: PropTypes.string,
     isDisabled: PropTypes.bool,
     isClearable: PropTypes.bool,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    isMulti: PropTypes.bool.isRequired
 }
 
 SelectField.defaultProps = {
@@ -86,7 +89,8 @@ SelectField.defaultProps = {
     placeholder: '',
     isDisabled: false,
     isClearable: true,
-    isLoading: true
+    isLoading: true,
+    isMulti: false
 }
 
 export default SelectField;

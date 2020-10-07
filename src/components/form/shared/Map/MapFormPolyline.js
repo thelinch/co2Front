@@ -2,8 +2,7 @@ import React from "react"
 import SearchBox from "../../../GoogleMap/SearchBox";
 import GoogleMap from "../../../GoogleMap/googleMap";
 import Marker from "../../../GoogleMap/Marker";
-import Geocode from "../../../../../Config/GeoCodeConfig"
-import { Info } from 'google-map-react';
+import Geocode from "../../../../Config/GeoCodeConfig"
 
 class MapFormPolyline extends React.Component {
     constructor(props) {
@@ -34,6 +33,7 @@ class MapFormPolyline extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.field.value != this.props.field.value) {
+            console.log("ddwd", this.props.field.value)
             this.setState({ points: this.props.field.value })
         }
     }
@@ -47,18 +47,18 @@ class MapFormPolyline extends React.Component {
     }
     onMarkerMove = (childKey, childProps, mouse) => {
         const { lat, lng } = mouse;
-        this.setState({ currentPosition: { lat, lng } })
         this.props.form.setFieldValue(this.props.field.name, { lat, lng });
 
     }
 
     render() {
-        const { places, mapApiLoaded, mapInstance, mapApi, currentPosition, draggable, points } = this.state
+        const { places, mapApiLoaded, mapInstance, mapApi, draggable, points } = this.state
         return (
             <>
-                {mapApiLoaded && <SearchBox map={mapInstance} currentPosition={currentPosition} mapApi={mapApi} addPlace={this.addPlace} />}
-                <GoogleMap defaultZoom={10} center={currentPosition}
+             {/*    {mapApiLoaded && <SearchBox map={mapInstance} mapApi={mapApi} addPlace={this.addPlace} />} */}
+                <GoogleMap defaultZoom={10}
                     yesIWantToUseGoogleMapApiInternals
+                    defaultCenter={[34.0522, -118.2437]}
                     draggable={draggable}
                     onGoogleApiLoaded={({ map, maps }) => {
                         this.apiHasLoaded(map, maps)
@@ -67,11 +67,11 @@ class MapFormPolyline extends React.Component {
                     onChildMouseMove={this.onMarkerMove}
                     onChildMouseUp={this.onMarkerUp}
                 >
-                    {
+                    {/* {
                         points.map((point) => (
                             <Marker lat={point.lat} lng={point.lng} key="qsqs-11" />
                         ))
-                    }
+                    } */}
                 </GoogleMap>
             </>
         )

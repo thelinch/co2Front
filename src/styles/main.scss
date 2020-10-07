@@ -25,6 +25,11 @@
         box-shadow: 0 0 0 0 #000000;
     }
 }
+[type="checkbox"]:checked,[type="checkbox"]:not(:checked){
+    position: absolute !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
 .d-flex {
     display: flex;
 }

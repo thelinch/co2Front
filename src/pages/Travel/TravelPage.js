@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Button from "../../components/button/button"
 import TravelListDown from "../../components/Down/TravelListDown"
+import TravelForm from "../../components/form/Travel/TravelForm"
 import TravelService from "../../service/TravelService"
 
 const TravelPage = (props) => {
@@ -10,12 +11,17 @@ const TravelPage = (props) => {
         getDataTravels();
     }, [])
     const getDataTravels = async () => {
+        setDataTravels({ isLoading: true, travels: [] })
+
         const travels = (await TravelService.all()).data
         setDataTravels({ isLoading: false, travels })
 
     }
     const handleEditTravel = (travel) => {
         setTravelSelect(travel)
+    }
+    const handleSubmitSuccess = (travel) => {
+        getDataTravels();
     }
     return <div className="row">
         <div className="col s12">
@@ -26,10 +32,7 @@ const TravelPage = (props) => {
         </div>
         <div id="modal1" className="modal">
             <div className="modal-content">
-
-            </div>
-            <div className="modal-footer">
-                <button className="modal-close waves-effect waves-green btn-flat" formTarget="" >Saved</button>
+                <TravelForm travelSelect={travelSelect} handleSubmitSuccess={handleSubmitSuccess} />
             </div>
         </div>
     </div>
