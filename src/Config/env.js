@@ -1,0 +1,1 @@
+export const urlData="http://localhost:3000/"
